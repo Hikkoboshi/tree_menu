@@ -1,0 +1,15 @@
+{% load draw_next %}
+
+<ul>
+{% for item in item.items.all %}
+    <li>
+        <a href="{{ item.get_absolute_url }}"
+                {% if context.context.request.path == item.get_absolute_url %}class="active"{% endif %}>
+            {{ item.title }}
+        </a>
+    </li>
+    {% if item.items.all %}
+        {% draw_next item.slug %}
+    {% endif %}
+{% endfor %}
+</ul>

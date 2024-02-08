@@ -1,0 +1,23 @@
+{% load draw_next %}
+
+<div>
+    {{ menu.title }}
+    {% with items=menu.items.all %}<ul>
+        {% for item in items %}
+
+
+            {% if item.items.all %}
+                    <li>
+                        <a href="{{ item.get_absolute_url }}"
+                           {% if context.request.path == item.get_absolute_url %}class="active"{% endif %}>
+                           {{ item.title }}
+                        </a>
+                                {% draw_next item.slug %}
+                            </ul>
+                    </li>
+            {% endif %}
+
+        {% endfor %}
+    </ul>
+    {% endwith %}
+</div>
